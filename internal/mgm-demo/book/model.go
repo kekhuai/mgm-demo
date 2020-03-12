@@ -7,3 +7,11 @@ type Book struct {
 	Name             string `json:"name" bson:"name"`
 	Pages            int    `json:"pages" bson:"pages"`
 }
+
+func (model *Book) Creating() error {
+	if err := model.DefaultModel.Creating(); nil != err {
+		return err
+	}
+	model.Name = "before save"
+	return nil
+}
